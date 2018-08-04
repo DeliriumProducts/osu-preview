@@ -1,225 +1,179 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="nofollow, noindex, noarchive">
-    <meta name="creator" content="https://github.com/sunghwan2789/osu-preview">
-    <title>미리보기 - osu! 비트맵 미러</title>
-    <!-- <meta name="mobile-web-app-capable" content="yes"> -->
-    <link rel="icon" sizes="any" href="/icon.svg">
-    <link rel="icon" sizes="192x192" href="/icon.png">
-    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
-    <link rel="apple-touch-icon" sizes="128x128" href="/apple-touch-icon.png">
+    <title>osu!preview</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- build:inlinecss -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- endbuild -->
-<body class="h">
-    <div id="container" class="x-viewbox"></div>
-    <button id="play" class="material-icons">&#xE037;</button>
-    <div id="speed"><!--
-         --><button value="1.5">DT</button><!--
-         --><button class="e" value="1">-</button><!--
-         --><button value="0.75">HT</button><!--
-     --></div>
-    <div id="mania"><!--
-         --><button value="1">+</button><!--
-         --><button id="scroll">20</button><!--
-         --><button value="-1">-</button><!--
-     --></div>
-    <div id="control"><!--
-         --><input id="progress" type="range" min="0" max="0" value="0"><!--
-         --><input id="volume" type="range" min="0" max="100" value="100"><!--
-         --><button id="fullscreen" class="material-icons">&#xE5D0;</button><!--
-     --></div>
-  
-<!--
-    <div id="sharePrompt"></div>
- -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <!-- build:inlinejs -->
-    <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script> -->
-    <script src="js/util.js"></script>
 
-    <script src="js/beatmap/beatmap.js"></script>
+    <body class="h">
+        <div id="container" class="x-viewbox"></div>
+        <button id="play" class="material-icons">&#xE037;</button>
+        <div id="speed">
+            <button value="1.5">DT</button>
+            <button class="e" value="1">-</button>
+            <button value="0.75">HT</button>
+        </div>
+        <div id="mania">
+            <button value="1">+</button>
+            <button id="scroll">20</button>
+            <button value="-1">-</button>
+        </div>
+        <div id="control">
+            <input id="progress" type="range" min="0" max="0" value="0">
+            <input id="volume" type="range" min="0" max="100" value="100">
+            <button id="fullscreen" class="material-icons">&#xE5D0;</button>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="js/util.js"></script>
+
+        <script src="js/beatmap/beatmap.js"></script>
         <script src="js/beatmap/timingpoint.js"></script>
         <script src="js/beatmap/hitobject.js"></script>
-            <script src="js/beatmap/point.js"></script>
+        <script src="js/beatmap/point.js"></script>
         <script src="js/beatmap/scroll.js"></script>
 
-    <script src="js/standard/standard.js"></script>
+        <script src="js/standard/standard.js"></script>
         <script src="js/standard/hitcircle.js"></script>
         <script src="js/standard/slider.js"></script>
-            <script src="js/standard/curve/curve.js"></script>
-            <script src="js/standard/curve/equaldistancemulticurve.js"></script>
-                <script src="js/standard/curve/linearbezier.js"></script>
-                <script src="js/standard/curve/catmullcurve.js"></script>
-                    <script src="js/standard/curve/curvetype.js"></script>
-                    <script src="js/standard/curve/bezier2.js"></script>
-                    <script src="js/standard/curve/centripetalcatmullrom.js"></script>
-            <script src="js/standard/curve/circumstancedcircle.js"></script>
+        <script src="js/standard/curve/curve.js"></script>
+        <script src="js/standard/curve/equaldistancemulticurve.js"></script>
+        <script src="js/standard/curve/linearbezier.js"></script>
+        <script src="js/standard/curve/catmullcurve.js"></script>
+        <script src="js/standard/curve/curvetype.js"></script>
+        <script src="js/standard/curve/bezier2.js"></script>
+        <script src="js/standard/curve/centripetalcatmullrom.js"></script>
+        <script src="js/standard/curve/circumstancedcircle.js"></script>
         <script src="js/standard/spinner.js"></script>
 
-    <script src="js/taiko/taiko.js"></script>
+        <script src="js/taiko/taiko.js"></script>
         <script src="js/taiko/donkat.js"></script>
         <script src="js/taiko/drumroll.js"></script>
         <script src="js/taiko/shaker.js"></script>
 
-    <script src="js/mania/mania.js"></script>
+        <script src="js/mania/mania.js"></script>
         <script src="js/mania/hitnote.js"></script>
         <script src="js/mania/holdnote.js"></script>
 
-    <script src="js/preview.js"></script>
-    <script src="js/viewbox.js"></script>
-    <!-- endbuild -->
-    <script>
+        <script src="js/preview.js"></script>
+        <script src="js/viewbox.js"></script>
+        <script>
 
-var preview = new Preview($('#container')[0]);
-var audio = new Audio();
+            let preview = new Preview($('#container')[0]);
+            let audio = new Audio();
 
-$(window).on('hashchange', function()
-{
-    $(audio).trigger('pause');
+            $(window).on('hashchange', function () {
+                $(audio).trigger('pause');
 
-    $('#mania').removeClass('e');
+                $('#mania').removeClass('e');
 
-    $('#play').removeClass('e');
+                $('#play').removeClass('e');
 
-    var beatmapID = location.href.split('#')[1];
-    preview.load(beatmapID, function()
-    {
-        audio.src = '/dist/audio.mp3';
-        $('#title a').prop('href', '//osu.ppy.sh/b/' + beatmapID)
-            .text(this.beatmap.toString());
+                let beatmapID = location.href.split('#')[1];
+                preview.load(beatmapID, function () {
+                    audio.src = '/temp/audio.mp3';
+                    $('#title a').prop('href', '//osu.ppy.sh/b/' + beatmapID)
+                        .text(this.beatmap.toString());
 
-        if (this.beatmap instanceof Mania)
-        {
-            $('#mania').addClass('e');
-            $('#scroll').text(this.beatmap.scrollSpeed);
-        }
+                    if (this.beatmap instanceof Mania) {
+                        $('#mania').addClass('e');
+                        $('#scroll').text(this.beatmap.scrollSpeed);
+                    }
 
-        $('#play').addClass('e');
-    }, function(e)
-    {
-        alert(e);
-        console.log(e);
-    });
-}).trigger('hashchange');
+                    $('#play').addClass('e');
+                }, function (e) {
+                    alert(e);
+                    console.log(e);
+                });
+            }).trigger('hashchange');
 
-$(document.body).on('mousemove', function()
-{
-    var self = $(this);
-    clearTimeout(self.data('h'));
-    self.addClass('h').data('h', setTimeout(function()
-    {
-        if (!audio.paused)
-        {
-            self.removeClass('h');
-        }
-    }, 3000));
-});
+            $(document.body).on('mousemove', function () {
+                let self = $(this);
+                clearTimeout(self.data('h'));
+                self.addClass('h').data('h', setTimeout(function () {
+                    if (!audio.paused) {
+                        self.removeClass('h');
+                    }
+                }, 3000));
+            });
 
-$(audio).on('pause', function(e)
-{
-    $(document.body).trigger('mousemove');
-    $('#play').addClass('e');
-}).on('play', function(e)
-{
-    preview.beatmap.refresh();
-    if (e.isTrigger)
-    {
-        e.preventDefault();
-        preview.at(audio.currentTime * 1000);
-    }
-    else
-    {
-        $('#play').removeClass('e');
-        requestAnimationFrame(function foo()
-        {
-            preview.at(audio.currentTime * 1000);
-            if (!audio.paused)
-            {
-                requestAnimationFrame(foo);
-            }
-        });
-    }
-}).on('durationchange', function()
-{
-    $('#progress').val(0).prop('max', this.duration);
-    $('#volume').trigger('change');
-    $('#speed .e').trigger('click');
-}).on('timeupdate', function()
-{
-    $('#progress').val(this.currentTime);
-});
+            $(audio).on('pause', function (e) {
+                $(document.body).trigger('mousemove');
+                $('#play').addClass('e');
+            }).on('play', function (e) {
+                preview.beatmap.refresh();
+                if (e.isTrigger) {
+                    e.preventDefault();
+                    preview.at(audio.currentTime * 1000);
+                }
+                else {
+                    $('#play').removeClass('e');
+                    requestAnimationFrame(function foo() {
+                        preview.at(audio.currentTime * 1000);
+                        if (!audio.paused) {
+                            requestAnimationFrame(foo);
+                        }
+                    });
+                }
+            }).on('durationchange', function () {
+                $('#progress').val(0).prop('max', this.duration);
+                $('#volume').trigger('change');
+                $('#speed .e').trigger('click');
+            }).on('timeupdate', function () {
+                $('#progress').val(this.currentTime);
+            });
 
-$('#progress').on('change', function()
-{
-    audio.currentTime = this.value;
-    $(audio).trigger('play');
-});
+            $('#progress').on('change', function () {
+                audio.currentTime = this.value;
+                $(audio).trigger('play');
+            });
 
-$('#volume').on('change', function()
-{
-    audio.volume = this.value / 100;
-});
+            $('#volume').on('change', function () {
+                audio.volume = this.value / 100;
+            });
 
-$('#speed button').on('click', function()
-{
-    $('#speed .e').removeClass('e');
-    audio.playbackRate = $(this).addClass('e').val();
-});
+            $('#speed button').on('click', function () {
+                $('#speed .e').removeClass('e');
+                audio.playbackRate = $(this).addClass('e').val();
+            });
 
-$('#mania button').on('click', function()
-{
-    var val = this.value | 0;
-    if (val)
-    {
-        preview.beatmap.scrollSpeed += val;
-        $('#scroll').text(preview.beatmap.scrollSpeed);
-        $(audio).trigger('play');
-    }
-});
+            $('#mania button').on('click', function () {
+                let val = this.value | 0;
+                if (val) {
+                    preview.beatmap.scrollSpeed += val;
+                    $('#scroll').text(preview.beatmap.scrollSpeed);
+                    $(audio).trigger('play');
+                }
+            });
 
-$('#play').on('click', function(e)
-{
-    e.preventDefault();
-    if ($(this).hasClass('e'))
-    {
-        audio.play();
-    }
-    else
-    {
-        audio.pause();
-    }
-});
+            $('#play').on('click', function (e) {
+                e.preventDefault();
+                if ($(this).hasClass('e')) {
+                    audio.play();
+                }
+                else {
+                    audio.pause();
+                }
+            });
 
-$('#fullscreen').on('click', function(e) {
-    e.preventDefault();
-    var doc = window.document;
-    var docEl = doc.documentElement;
+            $('#fullscreen').on('click', function (e) {
+                e.preventDefault();
+                let doc = window.document;
+                let docEl = doc.documentElement;
 
-    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+                let requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+                let cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
 
-    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-        requestFullScreen.call(docEl);
-    }
-    else {
-        cancelFullScreen.call(doc);
-    }
-});
-
-    </script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-21956094-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
+                if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+                    requestFullScreen.call(docEl);
+                }
+                else {
+                    cancelFullScreen.call(doc);
+                }
+            });
+        </script>
 </html>

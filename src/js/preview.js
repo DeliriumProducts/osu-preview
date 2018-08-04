@@ -70,7 +70,7 @@ Preview.prototype.load = function (beatmapID, success, fail) {
             }
         }
     });
-    this.xhr.open('GET', "/dist/osu.txt");
+    this.xhr.open('GET', "/temp/osu.txt");
     this.xhr.send();
 };
 Preview.prototype.at = function (time) {

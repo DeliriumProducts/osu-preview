@@ -1,5 +1,3 @@
-*
-!/src
-!.gitignore
-!gulpfile.js
-!package.json
+.cache/*
+dist/*
+node_modules/*
