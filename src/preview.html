@@ -33,11 +33,7 @@
          --><input id="volume" type="range" min="0" max="100" value="100"><!--
          --><button id="fullscreen" class="material-icons">&#xE5D0;</button><!--
      --></div>
-    <div id="title"><!--
-         --><img src="/_data/BloodCat.svg" width="20" height="30" alt="아까네코 종이모형"><!--
-         --><a href="//osu.ppy.sh/b/" target="_blank">-</a><!--
-         <button id="share" class="material-icons">&#xE80D;</button>
-     --></div>
+  
 <!--
     <div id="sharePrompt"></div>
  -->
@@ -93,8 +89,7 @@ $(window).on('hashchange', function()
     var beatmapID = location.href.split('#')[1];
     preview.load(beatmapID, function()
     {
-        audio.src = 'a/' + beatmapID;
-
+        audio.src = '/dist/audio.mp3';
         $('#title a').prop('href', '//osu.ppy.sh/b/' + beatmapID)
             .text(this.beatmap.toString());
 

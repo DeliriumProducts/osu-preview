@@ -1,4 +1,4 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     usemin = require('gulp-usemin'),
     uglify = require('gulp-uglify'),
     cssnano = require('gulp-cssnano'),
