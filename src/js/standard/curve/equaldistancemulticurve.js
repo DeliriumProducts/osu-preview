@@ -1,19 +1,19 @@
 function EqualDistanceMultiCurve(curves, pixelLength)
 {
     // https://github.com/itdelatrisu/opsu/blob/master/src/itdelatrisu/opsu/objects/curves/EqualDistanceMultiCurve.java
-    var nCurve = pixelLength / Curve.PRECISION | 0;
+    let nCurve = pixelLength / Curve.PRECISION | 0;
     this.path = [];
 
-    var distanceAt = 0,
+    let distanceAt = 0,
         curveIndex = 0,
         curve = curves[curveIndex],
         pointIndex = 0,
         startPoint = curve.path[0],
         lastDistanceAt = 0;
     // for each distance, try to get in between the two points that are between it
-    for (var i = 0; i <= nCurve; i++)
+    for (let i = 0; i <= nCurve; i++)
     {
-        var prefDistance = i * pixelLength / nCurve | 0;
+        let prefDistance = i * pixelLength / nCurve | 0;
         while (distanceAt < prefDistance)
         {
             lastDistanceAt = distanceAt;
@@ -38,7 +38,7 @@ function EqualDistanceMultiCurve(curves, pixelLength)
             }
             distanceAt += curve.distance[pointIndex];
         }
-        var endPoint = curve.path[pointIndex];
+        let endPoint = curve.path[pointIndex];
 
         // interpolate the point between the two closest distances
         if (distanceAt - lastDistanceAt > 1)
@@ -57,7 +57,7 @@ EqualDistanceMultiCurve.prototype = Object.create(Curve.prototype);
 EqualDistanceMultiCurve.prototype.constructor = EqualDistanceMultiCurve;
 EqualDistanceMultiCurve.prototype.pointAt = function(t)
 {
-    var indexF = this.path.length * t,
+    let indexF = this.path.length * t,
         index = indexF | 0;
     if (index + 1 < this.path.length)
     {

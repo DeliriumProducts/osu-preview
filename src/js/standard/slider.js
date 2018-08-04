@@ -2,17 +2,17 @@ function Slider(data, beatmap)
 {
     HitCircle.call(this, data, beatmap);
 
-    var points = data[5].split('|');
-    var sliderType = points[0];
+    let points = data[5].split('|');
+    let sliderType = points[0];
     points[0] = this.position;
-    for (var i = 1; i < points.length; i++)
+    for (let i = 1; i < points.length; i++)
     {
         points[i] = new Point(points[i].split(':'));
     }
     this.repeat = data[6] | 0;
     this.pixelLength = +data[7];
 
-    var sliderTime = this.beatmap.timingPointAt(this.time).beatLength * (
+    let sliderTime = this.beatmap.timingPointAt(this.time).beatLength * (
             this.pixelLength / this.beatmap.SliderMultiplier
         ) / 100;
     this.endTime += sliderTime * this.repeat;
@@ -32,7 +32,7 @@ Slider.REVERSE_ARROW = String.fromCharCode(10132);
 Slider.OPACITY = 0.66;
 Slider.prototype.draw = function(time, ctx)
 {
-    var dt = this.time - time,
+    let dt = this.time - time,
         opacity = 1;
     if (dt >= 0)
     {
@@ -48,7 +48,7 @@ Slider.prototype.draw = function(time, ctx)
     this.drawCircle(this.endPosition, ctx);
     this.drawCircle(this.position, ctx);
 
-    var repeat = -dt * this.repeat / this.duration;
+    let repeat = -dt * this.repeat / this.duration;
     //                                   this.repeat - this.repeat % 2: 홀수면 짝수로 내리기
     if (this.repeat > 1 && repeat + 1 <= (this.repeat & ~1))
     {
@@ -81,7 +81,7 @@ Slider.prototype.drawPath = function(ctx)
     ctx.beginPath();
     ctx.moveTo(this.position.x - this.stack * this.beatmap.stackOffset,
         this.position.y - this.stack * this.beatmap.stackOffset);
-    for (var i = 1; i < this.curve.path.length; i++)
+    for (let i = 1; i < this.curve.path.length; i++)
     {
         ctx.lineTo(this.curve.path[i].x - this.stack * this.beatmap.stackOffset,
             this.curve.path[i].y - this.stack * this.beatmap.stackOffset);
@@ -105,7 +105,7 @@ Slider.prototype.drawFollowCircle = function(repeat, ctx)
     {
         repeat = 2 - repeat;
     }
-    var point = this.curve.pointAt(repeat);
+    let point = this.curve.pointAt(repeat);
     ctx.beginPath();
     ctx.arc(point.x - this.stack * this.beatmap.stackOffset,
         point.y - this.stack * this.beatmap.stackOffset,

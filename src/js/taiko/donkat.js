@@ -28,8 +28,8 @@ DonKat.ID = 1;
 Taiko.prototype.hitObjectTypes[DonKat.ID] = DonKat;
 DonKat.prototype.draw = function(scroll, ctx)
 {
-    var diam = Taiko.DIAMETER * (this.dai ? 1.5 : 1);
-    var border = 3;
+    let diam = Taiko.DIAMETER * (this.dai ? 1.5 : 1);
+    let border = 3;
     ctx.beginPath();
     ctx.arc(this.beatmap.calcX(this.position.x, scroll), 0, diam / 2 - border / 2, -Math.PI, Math.PI);
     ctx.fillStyle = Taiko.DEFAULT_COLORS[this.kai];

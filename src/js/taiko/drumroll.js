@@ -9,8 +9,8 @@ Drumroll.ID = 2;
 Taiko.prototype.hitObjectTypes[Drumroll.ID] = Drumroll;
 Drumroll.prototype.draw = function(scroll, ctx)
 {
-    var diam = Taiko.DIAMETER;
-    var border = 3;
+    let diam = Taiko.DIAMETER;
+    let border = 3;
 
     ctx.beginPath();
     ctx.moveTo(this.beatmap.calcX(this.position.x, scroll), 0);

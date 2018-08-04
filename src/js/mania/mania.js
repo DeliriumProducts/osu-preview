@@ -5,11 +5,11 @@ function Mania(osu)
 
     this.scrollSpeed = Mania.SCROLL_SPEED;
 
-    for (var i = 0; i < this.keyCount; i++)
+    for (let i = 0; i < this.keyCount; i++)
     {
         this.Colors[i] = Mania.DEFAULT_COLORS[i & 1];
     }
-    var p = this.keyCount / 2;
+    let p = this.keyCount / 2;
     if (this.keyCount & 1)
     {
         this.Colors[p | 0] = Mania.DEFAULT_COLORS[2];
@@ -20,9 +20,9 @@ function Mania(osu)
     }
 
 
-    for (var i = 0; i < this.HitObjects.length; i++)
+    for (let i = 0; i < this.HitObjects.length; i++)
     {
-        var hitObject = this.HitObjects[i];
+        let hitObject = this.HitObjects[i];
         hitObject.color = this.Colors[hitObject.column];
         hitObject.position.x = Mania.COLUMN_WIDTH * hitObject.column;
         hitObject.position.y = this.scrollAt(hitObject.time);
@@ -73,7 +73,7 @@ Mania.prototype.draw = function(time, ctx)
         this.tmp.barLine = 0;
     }
 
-    var scroll = this.scrollAt(time);
+    let scroll = this.scrollAt(time);
     while (this.tmp.first < this.HitObjects.length &&
         time > this.HitObjects[this.tmp.first].endTime)
     {
@@ -81,7 +81,7 @@ Mania.prototype.draw = function(time, ctx)
     }
     while (this.tmp.last + 1 < this.HitObjects.length)
     {
-        var hitObject = this.HitObjects[this.tmp.last + 1];
+        let hitObject = this.HitObjects[this.tmp.last + 1];
         if (this.calcY(hitObject.position.y, scroll) < -Mania.COLUMN_WIDTH)
         {
             break;
@@ -93,9 +93,9 @@ Mania.prototype.draw = function(time, ctx)
     {
         this.tmp.barLine++;
     }
-    for (var i = this.tmp.barLine; i < this.barLines.length && this.calcY(this.barLines[i], scroll) > -Mania.COLUMN_WIDTH; i++)
+    for (let i = this.tmp.barLine; i < this.barLines.length && this.calcY(this.barLines[i], scroll) > -Mania.COLUMN_WIDTH; i++)
     {
-        var barLine = this.calcY(this.barLines[i], scroll);
+        let barLine = this.calcY(this.barLines[i], scroll);
         ctx.beginPath();
         ctx.moveTo(0, barLine);
         ctx.lineTo(Mania.COLUMN_WIDTH * this.keyCount, barLine);
@@ -103,9 +103,9 @@ Mania.prototype.draw = function(time, ctx)
         ctx.lineWidth = 1;
         ctx.stroke();
     }
-    for (var i = this.tmp.first; i <= this.tmp.last; i++)
+    for (let i = this.tmp.first; i <= this.tmp.last; i++)
     {
-        var hitObject = this.HitObjects[i];
+        let hitObject = this.HitObjects[i];
         if (time > hitObject.endTime)
         {
             continue;
@@ -124,9 +124,9 @@ Mania.prototype.processBG = function(ctx)
     ctx.fillStyle = '#000';
     ctx.fill();
 
-    for (var i = 0; i < this.keyCount; i++)
+    for (let i = 0; i < this.keyCount; i++)
     {
-        var x = Mania.COLUMN_START + Mania.COLUMN_WIDTH * i;
+        let x = Mania.COLUMN_START + Mania.COLUMN_WIDTH * i;
 
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -143,7 +143,7 @@ Mania.prototype.processBG = function(ctx)
         ctx.lineWidth = 3;
         ctx.stroke();
     }
-    var x = Mania.COLUMN_START + Mania.COLUMN_WIDTH * this.keyCount;
+    let x = Mania.COLUMN_START + Mania.COLUMN_WIDTH * this.keyCount;
     ctx.beginPath();
     ctx.moveTo(x, 0);
     ctx.lineTo(x, Mania.HIT_POSITION);

@@ -2,9 +2,9 @@ function Taiko(osu)
 {
     Scroll.call(this, osu);
 
-    for (var i = 0; i < this.HitObjects.length; i++)
+    for (let i = 0; i < this.HitObjects.length; i++)
     {
-        var hitObject = this.HitObjects[i];
+        let hitObject = this.HitObjects[i];
         hitObject.position.x = this.scrollAt(hitObject.time);
         hitObject.endPosition.x = this.scrollAt(hitObject.endTime);
     }
@@ -44,7 +44,7 @@ Taiko.prototype.draw = function(time, ctx)
         this.tmp.barLine = 0;
     }
 
-    var scroll = this.scrollAt(time);
+    let scroll = this.scrollAt(time);
     while (this.tmp.first < this.HitObjects.length &&
         time > this.HitObjects[this.tmp.first].endTime)
     {
@@ -52,7 +52,7 @@ Taiko.prototype.draw = function(time, ctx)
     }
     while (this.tmp.last + 1 < this.HitObjects.length)
     {
-        var hitObject = this.HitObjects[this.tmp.last + 1];
+        let hitObject = this.HitObjects[this.tmp.last + 1];
         if (this.calcX(hitObject.position.x, scroll) > Beatmap.WIDTH)
         {
             break;
@@ -64,9 +64,9 @@ Taiko.prototype.draw = function(time, ctx)
     {
         this.tmp.barLine++;
     }
-    for (var i = this.tmp.barLine; i < this.barLines.length && this.calcX(this.barLines[i], scroll) < Beatmap.WIDTH; i++)
+    for (let i = this.tmp.barLine; i < this.barLines.length && this.calcX(this.barLines[i], scroll) < Beatmap.WIDTH; i++)
     {
-        var barLine = this.calcX(this.barLines[i], scroll);
+        let barLine = this.calcX(this.barLines[i], scroll);
         ctx.beginPath();
         ctx.moveTo(barLine, -Taiko.DIAMETER);
         ctx.lineTo(barLine, Taiko.DIAMETER);
@@ -74,9 +74,9 @@ Taiko.prototype.draw = function(time, ctx)
         ctx.lineWidth = 1;
         ctx.stroke();
     }
-    for (var i = this.tmp.last; i >= this.tmp.first; i--)
+    for (let i = this.tmp.last; i >= this.tmp.first; i--)
     {
-        var hitObject = this.HitObjects[i];
+        let hitObject = this.HitObjects[i];
         if (time > hitObject.endTime)
         {
             continue;
@@ -87,7 +87,7 @@ Taiko.prototype.draw = function(time, ctx)
 };
 Taiko.prototype.processBG = function(ctx)
 {
-    var offset = 200 - Taiko.DIAMETER;
+    let offset = 200 - Taiko.DIAMETER;
     ctx.drawImage(ctx.canvas, 0, offset, ctx.canvas.width, ctx.canvas.height);
     ctx.beginPath();
     ctx.rect(0, 0, Beatmap.WIDTH, offset);
@@ -109,7 +109,7 @@ Taiko.prototype.processBG = function(ctx)
     ctx.fillStyle = '#ff0080';
     ctx.fill();
 
-    var border = 6;
+    let border = 6;
     ctx.beginPath();
     ctx.arc(160, 200, Taiko.DIAMETER / 2, -Math.PI, Math.PI);
     ctx.fillStyle = 'rgba(255,255,255,.2)';

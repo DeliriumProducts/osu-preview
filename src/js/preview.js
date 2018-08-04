@@ -7,20 +7,20 @@ function Preview(dest) {
     this.ctx = this.screen.getContext('2d');
     this.container.appendChild(this.screen);
 
-    var self = this;
+    let self = this;
     this.background = new Image();
     this.background.addEventListener('load', function () {
         if (!/^http/i.test(this.src)) {
             return;
         }
 
-        var canvas = document.createElement('canvas');
+        let canvas = document.createElement('canvas');
         canvas.width = self.screen.width;
         canvas.height = self.screen.height;
-        var ctx = canvas.getContext('2d');
+        let ctx = canvas.getContext('2d');
 
         // background-size: cover height
-        var sWidth = this.height * (self.screen.width / self.screen.height);
+        let sWidth = this.height * (self.screen.width / self.screen.height);
         ctx.drawImage(this, (this.width - sWidth) / 2, 0, sWidth, this.height,
             0, 0, self.screen.width, self.screen.height);
         // background dim
@@ -32,7 +32,7 @@ function Preview(dest) {
         }
 
         canvas.toBlob(function (blob) {
-            var url = URL.createObjectURL(blob);
+            let url = URL.createObjectURL(blob);
             self.background.src = url;
             self.container.style.backgroundImage = 'url(' + url + ')';
             // mandatory?
@@ -48,7 +48,7 @@ Preview.prototype.load = function (beatmapID, success, fail) {
         this.xhr.abort();
     }
 
-    var self = this;
+    let self = this;
     this.xhr = new XMLHttpRequest();
     this.xhr.addEventListener('load', function () {
         try {

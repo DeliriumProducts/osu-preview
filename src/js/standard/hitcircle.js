@@ -25,7 +25,7 @@ HitCircle.FADE_IN_TIME = 375;
 HitCircle.FADE_OUT_TIME = 200;
 HitCircle.prototype.draw = function(time, ctx)
 {
-    var dt = this.time - time,
+    let dt = this.time - time,
         opacity = 1;
     if (dt >= 0)
     {
@@ -73,7 +73,7 @@ HitCircle.prototype.drawText = function(position, text, deg, ctx)
 };
 HitCircle.prototype.drawApproach = function(dt, ctx)
 {
-    var scale = 1 + dt / this.beatmap.approachTime * 3;
+    let scale = 1 + dt / this.beatmap.approachTime * 3;
     ctx.beginPath();
     ctx.arc(this.position.x - this.stack * this.beatmap.stackOffset,
         this.position.y - this.stack * this.beatmap.stackOffset,

@@ -12,10 +12,10 @@ HoldNote.WIDTH_SCALE = 0.8;
 HoldNote.OPACITY = 0.66;
 HoldNote.prototype.draw = function(scroll, ctx)
 {
-    var sy = this.beatmap.calcY(this.position.y, scroll) - Mania.COLUMN_WIDTH / 3,
+    let sy = this.beatmap.calcY(this.position.y, scroll) - Mania.COLUMN_WIDTH / 3,
         ey = this.beatmap.calcY(this.endPosition.y, scroll) - Mania.COLUMN_WIDTH / 3;
 
-    var w = Mania.COLUMN_WIDTH * HoldNote.WIDTH_SCALE;
+    let w = Mania.COLUMN_WIDTH * HoldNote.WIDTH_SCALE;
     ctx.globalAlpha = HoldNote.OPACITY;
     ctx.beginPath();
     ctx.rect(this.position.x + (Mania.COLUMN_WIDTH - w) / 2, ey, w, sy - ey);

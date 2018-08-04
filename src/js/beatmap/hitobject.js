@@ -12,13 +12,13 @@ function HitObject(data, beatmap)
 HitObject.prototype.draw = undefined;
 HitObject.parse = function(line, beatmap)
 {
-    var data = line.split(',');
+    let data = line.split(',');
     if (data.length < 5)
     {
         throw 'invalid data';
     }
 
-    var type = data[3] & beatmap.hitObjectTypeMask;
+    let type = data[3] & beatmap.hitObjectTypeMask;
     if (!(type in beatmap.hitObjectTypes))
     {
         // throw 'we do not support this hitobject type';

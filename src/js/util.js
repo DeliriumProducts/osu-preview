@@ -1,7 +1,7 @@
 Math.hypot = Math.hypot || function()
 {
-    var power = 0;
-    for (var i = 0; i < arguments.length; i++)
+    let power = 0;
+    for (let i = 0; i < arguments.length; i++)
     {
         power += arguments[i] * arguments[i];
     }
@@ -23,7 +23,7 @@ Math.lerp = Math.lerp || function(a, b, t)
  */
 Math.ccw = function(a, b, c)
 {
-    var ret = (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
+    let ret = (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
     if (ret > 0)
     {
         return 1;
@@ -41,11 +41,11 @@ if (!HTMLCanvasElement.prototype.toBlob)
         value: function (callback, type, quality)
         {
 
-            var binStr = atob(this.toDataURL(type, quality).split(',')[1]),
+            let binStr = atob(this.toDataURL(type, quality).split(',')[1]),
                 len = binStr.length,
                 arr = new Uint8Array(len);
 
-            for (var i = 0; i < len; i++)
+            for (let i = 0; i < len; i++)
             {
                 arr[i] = binStr.charCodeAt(i);
             }

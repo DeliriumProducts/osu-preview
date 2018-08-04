@@ -13,12 +13,12 @@ function Standard(osu)
         this.Colors = Standard.DEFAULT_COLORS;
     }
 
-    var combo = 1,
+    let combo = 1,
         comboIndex = -1,
         setComboIndex = 1;
-    for (var i = 0; i < this.HitObjects.length; i++)
+    for (let i = 0; i < this.HitObjects.length; i++)
     {
-        var hitObject = this.HitObjects[i];
+        let hitObject = this.HitObjects[i];
         if (hitObject instanceof Spinner)
         {
             setComboIndex = 1;
@@ -36,17 +36,17 @@ function Standard(osu)
 
     // calculate stacks
     // https://gist.github.com/peppy/1167470
-    for (var i = this.HitObjects.length - 1; i > 0; i--)
+    for (let i = this.HitObjects.length - 1; i > 0; i--)
     {
-        var hitObject = this.HitObjects[i];
+        let hitObject = this.HitObjects[i];
         if (hitObject.stack != 0 || hitObject instanceof Spinner)
         {
             continue;
         }
 
-        for (var n = i - 1; n >= 0; n--)
+        for (let n = i - 1; n >= 0; n--)
         {
-            var hitObjectN = this.HitObjects[n];
+            let hitObjectN = this.HitObjects[n];
             if (hitObjectN instanceof Spinner)
             {
                 continue;
@@ -61,10 +61,10 @@ function Standard(osu)
             {
                 if (hitObjectN instanceof Slider)
                 {
-                    var offset = hitObject.stack - hitObjectN.stack + 1;
-                    for (var j = n + 1; j <= i; j++)
+                    let offset = hitObject.stack - hitObjectN.stack + 1;
+                    for (let j = n + 1; j <= i; j++)
                     {
-                        var hitObjectJ = this.HitObjects[j];
+                        let hitObjectJ = this.HitObjects[j];
                         if (hitObjectJ.position.distanceTo(hitObjectN.endPosition) < Standard.STACK_LENIENCE)
                         {
                             hitObjectJ.stack -= offset;
@@ -143,7 +143,7 @@ Standard.prototype.draw = function(time, ctx)
 
     while (this.tmp.first < this.HitObjects.length)
     {
-        var hitObject = this.HitObjects[this.tmp.first];
+        let hitObject = this.HitObjects[this.tmp.first];
         if (time <= hitObject.endTime + hitObject.__proto__.constructor.FADE_OUT_TIME)
         {
             break;
@@ -155,9 +155,9 @@ Standard.prototype.draw = function(time, ctx)
     {
         this.tmp.last++;
     }
-    for (var i = this.tmp.last; i >= this.tmp.first; i--)
+    for (let i = this.tmp.last; i >= this.tmp.first; i--)
     {
-        var hitObject = this.HitObjects[i];
+        let hitObject = this.HitObjects[i];
         if (time > hitObject.endTime + hitObject.__proto__.constructor.FADE_OUT_TIME)
         {
             continue;

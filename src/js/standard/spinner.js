@@ -15,7 +15,7 @@ Spinner.RADIUS = Beatmap.MAX_Y / 2;
 Spinner.BORDER_WIDTH = Spinner.RADIUS / 20;
 Spinner.prototype.draw = function(time, ctx)
 {
-    var dt = this.time - time,
+    let dt = this.time - time,
         opacity = 1;
     if (dt >= 0)
     {
@@ -44,7 +44,7 @@ Spinner.prototype.draw = function(time, ctx)
     // Approach
     if (dt < 0 && time <= this.endTime)
     {
-        var scale = 1 + dt / this.duration;
+        let scale = 1 + dt / this.duration;
         ctx.beginPath();
         ctx.arc(this.position.x, this.position.y,
             (Spinner.RADIUS - Spinner.BORDER_WIDTH / 2) * scale, -Math.PI, Math.PI);

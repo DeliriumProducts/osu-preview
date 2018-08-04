@@ -1,6 +1,6 @@
 function TimingPoint(line)
 {
-    var data = line.split(',');
+    let data = line.split(',');
     if (data.length < 2)
     {
         throw 'invalid data';
@@ -18,7 +18,7 @@ function TimingPoint(line)
     else
     {
         this.parent = TimingPoint.parent;
-        var sliderVelocity = -100 / this.beatLength;
+        let sliderVelocity = -100 / this.beatLength;
         this.beatLength = this.parent.beatLength / sliderVelocity;
         this.meter = this.parent.meter;
     }

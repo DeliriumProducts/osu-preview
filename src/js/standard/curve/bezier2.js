@@ -7,8 +7,8 @@ function Bezier2(points)
     }
 
     this.points = points;
-    var approxLength = 0;
-    for (var i = 1; i < this.points.length; i++)
+    let approxLength = 0;
+    for (let i = 1; i < this.points.length; i++)
     {
         approxLength += this.points[i].distanceTo(this.points[i - 1]);
     }
@@ -19,12 +19,12 @@ Bezier2.prototype = Object.create(CurveType.prototype);
 Bezier2.prototype.constructor = Bezier2;
 Bezier2.prototype.pointAt = function(t)
 {
-    var n = this.points.length - 1,
+    let n = this.points.length - 1,
         point = new Point(),
         combination = 1;
-    for (var i = 0; i <= n; i++)
+    for (let i = 0; i <= n; i++)
     {
-        var bernstein = combination * Math.pow(t, i) * Math.pow(1 - t, n - i);
+        let bernstein = combination * Math.pow(t, i) * Math.pow(1 - t, n - i);
         point.x += this.points[i].x * bernstein;
         point.y += this.points[i].y * bernstein;
         combination = combination * (n - i) / (i + 1);

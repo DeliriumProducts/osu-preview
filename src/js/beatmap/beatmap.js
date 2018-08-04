@@ -1,6 +1,6 @@
 function Beatmap(osu)
 {
-    // for temporary vars that need for drawing
+    // for temporary lets that need for drawing
     this.tmp = {};
 
     // [General]
@@ -30,7 +30,7 @@ function Beatmap(osu)
     this.HitObjects = [];
 
 
-    var stream = osu.replace(/\r\n?/g, '\n').split('\n').reverse(),
+    let stream = osu.replace(/\r\n?/g, '\n').split('\n').reverse(),
         currentSection, line;
     while (typeof (line = stream.pop()) != 'undefined')
     {
@@ -53,7 +53,7 @@ function Beatmap(osu)
             case 'Difficulty':
             {
                 // let [key, ...value] = line.split(':');
-                var data = line.split(':'),
+                let data = line.split(':'),
                     key = data.shift(),
                     value = data.join(':');
                 if (key in this)
@@ -74,7 +74,7 @@ function Beatmap(osu)
             case 'Colours':
             {
                 // let [key, value] = line.split(':');
-                var data = line.split(':');
+                let data = line.split(':');
                 if (/^Combo\d+/.test(data[0]))
                 {
                     this.Colors.push('rgb(' + data[1] + ')');
@@ -149,7 +149,7 @@ Beatmap.parse = function(osu)
     }
 
     // default mode is standard(id: 0)
-    var mode = +((osu.match(/[\r\n]Mode.*?:(.*?)[\r\n]/) || [])[1]) || 0;
+    let mode = +((osu.match(/[\r\n]Mode.*?:(.*?)[\r\n]/) || [])[1]) || 0;
     if (!(mode in Beatmap.modes))
     {
         throw 'we do not support this beatmap mode';
@@ -159,11 +159,11 @@ Beatmap.parse = function(osu)
 };
 Beatmap.prototype.timingPointIndexAt = function(time)
 {
-    var begin = 0,
+    let begin = 0,
         end = this.TimingPoints.length - 1;
     while (begin <= end)
     {
-        var mid = (begin + end) / 2 | 0;
+        let mid = (begin + end) / 2 | 0;
         if (time >= this.TimingPoints[mid].time)
         {
             if (mid + 1 == this.TimingPoints.length ||
@@ -190,7 +190,7 @@ Beatmap.prototype.refresh = function()
 };
 Beatmap.prototype.toString = function()
 {
-    var unicode = JSON.parse(localStorage['osu_tool'] || '{"unicode":false}')['unicode'];
+    let unicode = JSON.parse(localStorage['osu_tool'] || '{"unicode":false}')['unicode'];
     return [
         (unicode ?
             [

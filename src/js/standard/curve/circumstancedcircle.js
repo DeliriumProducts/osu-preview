@@ -1,6 +1,6 @@
 function CircumscribedCircle(points, pixelLength)
 {
-    var a = points[0].x - points[1].x, b = points[0].y - points[1].y,
+    let a = points[0].x - points[1].x, b = points[0].y - points[1].y,
         c = points[1].x - points[2].x, d = points[1].y - points[2].y,
         q = (a * d - b * c) * 2,
         l0 = points[0].x * points[0].x + points[0].y * points[0].y,
@@ -28,9 +28,9 @@ function CircumscribedCircle(points, pixelLength)
         delta: t
     };
 
-    var nCurve = pixelLength / Curve.PRECISION | 0;
+    let nCurve = pixelLength / Curve.PRECISION | 0;
     this.path = [];
-    for (var i = 0; i <= nCurve; i++)
+    for (let i = 0; i <= nCurve; i++)
     {
         this.path[i] = this.pointAt(i / nCurve);
     }
@@ -41,7 +41,7 @@ CircumscribedCircle.prototype = Object.create(Curve.prototype);
 CircumscribedCircle.prototype.constructor = CircumscribedCircle;
 CircumscribedCircle.prototype.pointAt = function(t)
 {
-    var angle = this.angle.base + this.angle.delta * t;
+    let angle = this.angle.base + this.angle.delta * t;
     return new Point(this.circle.x + Math.cos(angle) * this.circle.radius,
         this.circle.y + Math.sin(angle) * this.circle.radius);
 };

@@ -1,12 +1,12 @@
 function LinearBezier(points, pixelLength, linear)
 {
     // https://github.com/itdelatrisu/opsu/blob/master/src/itdelatrisu/opsu/objects/curves/LinearBezier.java
-    var beziers = [],
+    let beziers = [],
         controls = [],
         last;
-    for (var i = 0; i < points.length; i++)
+    for (let i = 0; i < points.length; i++)
     {
-        var point = points[i];
+        let point = points[i];
         if (linear)
         {
             if (typeof last != 'undefined')

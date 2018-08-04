@@ -9,11 +9,11 @@ Shaker.ID = 8;
 Taiko.prototype.hitObjectTypes[Shaker.ID] = Shaker;
 Shaker.prototype.draw = function(scroll, ctx)
 {
-    var ds = this.beatmap.calcX(this.position.x, scroll);
+    let ds = this.beatmap.calcX(this.position.x, scroll);
     if (ds > 0)
     {
-        var diam = Taiko.DIAMETER * 1.5;
-        var border = 3;
+        let diam = Taiko.DIAMETER * 1.5;
+        let border = 3;
         ctx.beginPath();
         ctx.arc(this.beatmap.calcX(this.position.x, scroll), 0, diam / 2 - border / 2, -Math.PI, Math.PI);
         ctx.fillStyle = Taiko.DEFAULT_COLORS[2];
@@ -43,7 +43,7 @@ Shaker.prototype.draw = function(scroll, ctx)
         // Approach
         if (ds < 0 && scroll <= this.endPosition.x)
         {
-            var scale = 1 + ds / this.beatmap.calcX(this.endPosition.x, this.position.x);
+            let scale = 1 + ds / this.beatmap.calcX(this.endPosition.x, this.position.x);
             ctx.beginPath();
             ctx.arc(0, 0,
                 (Spinner.RADIUS - Spinner.BORDER_WIDTH / 2) * scale, -Math.PI, Math.PI);
